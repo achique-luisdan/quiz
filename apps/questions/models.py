@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from uuid import uuid4
 
 class Topic (models.Model):
+    ordinal = models.IntegerField(null=True, blank=True)
     title = models.CharField(max_length=120, null=False, blank=False)
     icon = models.CharField(max_length=355, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
