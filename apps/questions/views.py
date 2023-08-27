@@ -59,6 +59,12 @@ class AnswerView(viewsets.ModelViewSet):
                             'description': 'After you submit your answer, you cannot edit it.'},
                          status=HTTP_401_UNAUTHORIZED
                         )
+    def destroy(self, request, pk=None):
+        return Response({
+                            'error': 'Unauthorized',
+                            'description': 'Submitted responses cannot be deleted.'},
+                         status=HTTP_401_UNAUTHORIZED
+                        )
 
     def get_queryset(self):
         # Reverse ForeignKey relationship
