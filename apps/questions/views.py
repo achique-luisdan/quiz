@@ -3,9 +3,23 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 
-from .models import Question, Option, Answer
+from .models import Topic, Question, Option, Answer
 
-from .serializers import QuestionSer, OptionSer, AnswerSer, UserSer
+from .serializers import TopicSer, QuestionSer, OptionSer, AnswerSer, UserSer
+
+
+class TopicView(viewsets.ModelViewSet):
+    queryset = Topic.objects.all()
+    serializer_class = TopicSer
+
+    def create(self, request, *args, **kwargs):
+        serializer = TopicSer(data=request.data,  many=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
 
 class QuestionView(viewsets.ModelViewSet):
     queryset = Question.objects.all()

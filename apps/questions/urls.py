@@ -1,8 +1,10 @@
 from rest_framework import routers
 
-from .views import QuestionView, OptionView, AnswerView, UserView
+from .views import TopicView, QuestionView, OptionView, AnswerView, UserView
 
 router = routers.SimpleRouter()
+
+router.register('topics', TopicView)
 
 router.register('questions', QuestionView)
 
