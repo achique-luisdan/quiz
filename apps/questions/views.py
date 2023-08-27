@@ -39,6 +39,20 @@ class AnswerView(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswerSer
 
+    def list(self, request):
+        return Response({
+                            'error': 'Unauthorized',
+                            'description': 'It is not allowed to see the answers of other users.'},
+                         status=HTTP_401_UNAUTHORIZED
+                        )
+    def retrieve(self, request, pk=None):
+        return Response({
+                            'error': 'Unauthorized',
+                            'description': 'It is not allowed to see the answers of other users.'},
+                         status=HTTP_401_UNAUTHORIZED
+                        )
+
+
     def update(self, request, pk=None):
         return Response({
                             'error': 'Unauthorized',
