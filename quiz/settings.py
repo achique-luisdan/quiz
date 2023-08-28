@@ -25,7 +25,22 @@ SECRET_KEY = 'django-insecure-h8n7j#9^4yhz_9#*j-^+r2-0@8@@-_i*m7qraz!rvo0cgza%(9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS  = [
+    'http://localhost:5173'
+]
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8080',
+    'http://localhost',
+)
+
+CORS_ALLOW_HEADERS = [
+    'Content-Type',
+    'Authorization',
+    'X-Custom-Header',
+]
 
 REST_FRAMEWORK = {
   'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -49,6 +64,8 @@ REST_FRAMEWORK = {
 # Application definition
 
 INSTALLED_APPS = [
+       # Instalación de Corsheaders.
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,6 +74,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+ 
     'apps.questions',
     'apps.rankings'
 ]
@@ -69,6 +87,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     # Agregación del middleware para Corsheaders.
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'quiz.urls'
